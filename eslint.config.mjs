@@ -8,12 +8,12 @@ import pluginJs from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 
 // mimic CommonJS variables -- not needed if using CommonJS
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
+const __filename = fileURLToPath(import.meta.url); //NOSONAR
+const __dirname = path.dirname(__filename); //NOSONAR
+const compat = new FlatCompat({ 
   baseDirectory: __dirname,
   recommendedConfig: pluginJs.configs.recommended,
-});
+}); //NOSONAR
 
 export default [
   {
