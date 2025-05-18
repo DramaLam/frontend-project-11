@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RSS agregator</title>
+  </head>
+  <body class="page d-flex flex-column min-vh-100">
+
+    <main class="flex-grow-1">
+      <section class="container-fluid bg-dark p-5">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto text-white">
+            <h1 class="display-3 mb-0">RSS агрегатор</h1>
+            <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
+            <form class="rss-form" action="#" method="GET">
+              <div class="row">
+                <div class="col">
+                  <div class="form-floating">
+                    <input type="text" autofocus required class="form-control w-100" aria-label="url" name="add-rss" placeholder="Ссылка RSS" required>
+                    <label for="add-rss" style="color: grey">Ссылка RSS</label>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-success h-100 btn-lg px-sm-5" type="submit" aria-label="add">Добавить</button>
+                </div>
+              </div>
+            </form>
+  
+            <p class="text-secondary my-2">Пример: https://dev.to/feed</p>
+            <p class="message-container fade my-1" id="messageContainer"></p>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid container-xxl p-5">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 order-1 mx-auto posts"></div>
+          <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer py-3 bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-lg-10 mx-auto">
+            <div class="row justify-content-between">
+              <div class="col-auto">
+                <a class="text-light" href="https://github.com/DramaLam/frontend-project-11" target="_blank">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                  <span class="small">DramaLam</span>
+                </a>
+              </div>
+              <div class="col-auto text-right">
+                <a class="small text-light" href="https://ru.hexlet.io/programs/frontend/projects/11" target="_blank">© Hexlet</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <div class="modal fade" id="postPreviewModal" tabindex="-1" aria-labelledby="postPreviewModalLabel" aria-hidden="false">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header align-items-start">
+            <h5 class="modal-title" id="postPreviewModalLabel">Заголовок</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Контент
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            <a href="" class="btn btn-success" data-readmore target="_blank">Читать полностью</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
