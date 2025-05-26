@@ -3,7 +3,7 @@
 const { test, expect } = require('@playwright/test');
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:8080');
+  await page.goto('http://[::1]:8080/');
 });
 
 const URLS = [
@@ -28,7 +28,7 @@ const testCasesToAddUrl = [
 
 test.describe('Common test', () => {
   test('has title', async ({ page }) => {
-    await page.goto('http://localhost:8080/');
+    await page.goto('http://[::1]:8080//');
 
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle('RSS agregator');
