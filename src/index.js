@@ -1,7 +1,5 @@
-// Импортируйте наш пользовательский CSS
+import * as bootstrap from 'bootstrap';
 import init from './app.js';
-import './styles.scss'
-// Импортируйте весь JS Bootstrap
-import * as bootstrap from 'bootstrap'
+import './styles.scss';
 
 init();
