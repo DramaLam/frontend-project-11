@@ -13,7 +13,6 @@
   "license": "ISC",
   "author": "",
   "main": "src/index.js",
-  "type": "module",
   "scripts": {
     "watch": "webpack --watch",
     "start": "webpack serve --open",
