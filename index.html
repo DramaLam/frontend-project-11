@@ -2,49 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>frontend-project-11</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"/>
-    <style>
-      h1 { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 3rem; }
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <div class="row justify-content-center bg-dark">
-        <div class="col-md-8 col-lg-6 my-4">
-          
-          <h1 class="h1 text-white">RSS агрегатор</h1>
-          
-          <p class="text-white">
-            Начните читать RSS сегодня! Это легко, это красиво.
-          </p>
-
-          <form id="rss-form" class="row g-3 align-items-center">
-            <div class="col">
-              <input 
-                type="url" 
-                class="form-control" 
-                id="url-input" 
-                placeholder="Ссылка RSS" 
-                required
-              />
-              <label for="url-input" hidden>Ссылка RSS</label>
-            </div>
-            <div class="col-auto">
-              <button type="submit" class="btn bg-light px-4">
-                Добавить
-              </button>
-            </div>
-          </form> 
-
-          <p class="text-white-50 px-0 small mt-1">
-            Пример: https://lorem-rss.hexlet.app/feed
-          </p>
-        </div>
-      </div>
-    </div>
     <script type="module" src="/src/main.js"></script>
+  </head>
+  <body class="page d-flex flex-column min-vh-100">
+
+  <!-- Главный контент -->
+    <main class="flex-grow-1">
+
+      <!-- Секция с заголовком и формой -->
+      <section class="container-fluid bg-dark p-5">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto text-white">
+            <h1 class="display-3 mb-0">RSS агрегатор</h1>
+            <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
+
+            <form class="rss-form" action="#">
+              <div class="row">
+                <div class="col">
+                  <div class="form-floating">
+                    <input
+                      autofocus
+                      required
+                      class="form-control w-100"
+                      aria-label="url"
+                      name="add-rss"
+                      placeholder="Ссылка RSS"
+                    />
+                    <label for="add-rss" style="color: grey">Ссылка RSS</label>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <button
+                    class="btn btn-success h-100 btn-lg px-sm-5"
+                    type="submit"
+                    aria-label="add"
+                  >
+                    Добавить
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <p class="text-secondary my-2">Пример: https://dev.to/feed</p>
+            <p class="message-container fade my-1" id="messageContainer"></p>
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
