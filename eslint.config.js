@@ -16,6 +16,18 @@ const compat = new FlatCompat({
 
 export default [
   {
+    ignores: [
+      "node_modules/",
+      "dist/",
+      "*.config.js",
+      "*.config.mjs",
+      "vite.config.js",
+      "eslint.config.js",
+      "eslint.config.mjs",
+      "Makefile"
+    ]
+  },
+  {
     languageOptions: {
       globals: {
         ...globals.node,
