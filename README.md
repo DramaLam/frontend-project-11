@@ -8,4 +8,4 @@
 
 Это простой RSS-агрегатор.
 
-[Посмотреть сайт](frontend-project-11-opal-ten.vercel.app)
+[Посмотреть сайт](https://frontend-project-11-opal-ten.vercel.app)
