@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend-project-11</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"/>
+    <style>
+      h1 { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 3rem; }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="row justify-content-center bg-dark">
+        <div class="col-md-8 col-lg-6 my-5">
+          
+          <h1 class="h1 text-white">RSS агрегатор</h1>
+          
+          <p class="text-white">
+            Начните читать RSS сегодня! Это легко, это красиво.
+          </p>
+
+          <form id="rss-form" class="row g-3 align-items-center">
+            <div class="col">
+              <input 
+                type="url" 
+                class="form-control" 
+                id="url-input" 
+                placeholder="Ссылка RSS" 
+                required
+              />
+              <label for="url-input" hidden>Ссылка RSS</label>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn px-4" style="background-color: #cdd9e8; border-color: #b5c8de; color: #2c3e50;">
+                Добавить
+              </button>
+            </div>
+          </form> 
+
+          <p class="text-white-50 px-0 small mt-1">
+            Пример: https://lorem-rss.hexlet.app/feed
+          </p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
