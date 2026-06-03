@@ -31,6 +31,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.node,
+        ...globals.browser,
         ...globals.jest,
       },
       parserOptions: {
@@ -56,6 +57,7 @@ export default [
       ],
       'import/extensions': [
         'error',
+        'ignorePackages',
         {
           js: 'always',
         },

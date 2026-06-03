@@ -24,10 +24,13 @@
                 <div class="col">
                   <div class="form-floating">
                     <input
+                      id="add-rss"
+                      type="url"
                       autofocus
                       required
+                      autocomplete="url"
                       class="form-control w-100"
-                      aria-label="url"
+                      aria-label="Ссылка RSS"
                       name="add-rss"
                       placeholder="Ссылка RSS"
                     />
@@ -36,7 +39,7 @@
                 </div>
                 <div class="col-auto">
                   <button
-                    class="btn btn-success h-100 btn-lg px-sm-5"
+                    class="btn btn-primary h-100 btn-lg px-sm-5"
                     type="submit"
                     aria-label="add"
                   >
@@ -47,7 +50,7 @@
             </form>
 
             <p class="text-secondary my-2">Пример: https://dev.to/feed</p>
-            <p class="message-container fade my-1" id="messageContainer"></p>
+            <p class="message-container m-0" id="messageContainer"></p>
           </div>
         </div>
       </section>
