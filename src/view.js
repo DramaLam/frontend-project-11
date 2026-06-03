@@ -1,15 +1,5 @@
-import * as yup from 'yup'
-import { proxy, subscribe, snapshot } from 'valtio/vanilla'
-
-const schema = yup.object({
-  url: yup
-    .string()
-    .required('Не должно быть пустым')
-    .url('Ссылка должна быть валидным URL')
-    .test('unique', 'RSS уже существует', (value) => {
-      return !state.feeds.includes(value);
-    }),
-});
+import * as yup from 'yup';
+import { proxy } from 'valtio/vanilla';
 
 export const state = proxy({
   form: {
@@ -18,6 +8,14 @@ export const state = proxy({
     valid: false,
   },
   feeds: [],
+});
+
+const schema = yup.object({
+  url: yup
+    .string()
+    .required('Не должно быть пустым')
+    .url('Ссылка должна быть валидным URL')
+    .test('unique', 'RSS уже существует', (value) => !state.feeds.includes(value)),
 });
 
 export const validate = (url) => {
@@ -36,7 +34,8 @@ export const validate = (url) => {
     })
     .catch((err) => {
       state.form.valid = false;
-      state.form.error = err.errors[0];
+      const [firstError] = err.errors;
+      state.form.error = firstError;
       return false;
     });
 };

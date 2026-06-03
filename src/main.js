@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { subscribe } from 'valtio/vanilla';
 import { state, validate } from './view.js';
-import { subscribe } from 'valtio/vanilla'
 
 const app = () => {
   const input = document.querySelector('.form-control');
   const form = document.querySelector('.rss-form');
   const messageContainer = document.querySelector('#messageContainer');
 
-  if (!input) return
+  if (!input) return;
 
   // Отправка формы
   form.addEventListener('submit', (e) => {
@@ -16,7 +16,7 @@ const app = () => {
 
     // Ждём микротаск — валидация уже отработала в subscribe
     validate(state.form.url).then((isValid) => {
-      if (!isValid) return;
+      if (!isValid) return null;
 
       // Успех
       state.feeds.push(state.form.url);
@@ -42,8 +42,7 @@ const app = () => {
       input.classList.add('is-invalid');
       messageContainer.classList.add('text-danger');
       messageContainer.textContent = state.form.error;
-    };
-    console.log(state.feeds)
+    }
   });
 };
 
