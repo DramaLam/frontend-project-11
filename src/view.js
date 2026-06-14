@@ -1,5 +1,7 @@
+import i18next from 'i18next';
 import * as yup from 'yup';
 import { proxy } from 'valtio/vanilla';
+import resources from './locales/index.js';
 
 export const state = proxy({
   form: {
@@ -10,18 +12,31 @@ export const state = proxy({
   feeds: [],
 });
 
+export const i18n = i18next.createInstance();
+
+export const initPromise = i18n.init({ lng: 'ru', resources });
+
+yup.setLocale({
+  mixed: {
+    required: 'errors.notEmpty',
+  },
+  string: {
+    url: 'errors.url',
+  },
+});
+
 const schema = yup.object({
   url: yup
     .string()
-    .required('Не должно быть пустым')
-    .url('Ссылка должна быть валидным URL')
-    .test('unique', 'RSS уже существует', (value) => !state.feeds.includes(value)),
+    .required()
+    .url()
+    .test('unique', 'errors.duplicate', (value) => !state.feeds.includes(value)),
 });
 
 export const validate = (url) => {
   if (url === '') {
     state.form.valid = false;
-    state.form.error = null;
+    state.form.error = 'errors.notEmpty';
     return Promise.resolve(false);
   }
 

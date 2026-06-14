@@ -4,6 +4,9 @@ install:
 lint:
 	npx eslint .
 
+fix:
+	npx eslint . --fix
+
 webpack:
 	npx webpack serve
 
