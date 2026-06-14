@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { subscribe } from 'valtio/vanilla';
-import { state, validate } from './view.js';
+import {
+  state, validate, i18n, initPromise,
+} from './view.js';
 
 const app = () => {
   const input = document.querySelector('.form-control');
@@ -27,7 +29,7 @@ const app = () => {
       return Promise.resolve().then(() => {
         input.classList.add('is-valid');
         messageContainer.classList.add('text-success');
-        messageContainer.textContent = 'RSS успешно загружен';
+        messageContainer.textContent = i18n.t('success.loaded');
       });
     });
   });
@@ -41,9 +43,9 @@ const app = () => {
     if (state.form.error) {
       input.classList.add('is-invalid');
       messageContainer.classList.add('text-danger');
-      messageContainer.textContent = state.form.error;
+      messageContainer.textContent = i18n.t(state.form.error);
     }
   });
 };
 
-app();
+initPromise.then(() => { app(i18n); });
