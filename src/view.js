@@ -10,6 +10,7 @@ export const state = proxy({
     valid: false,
   },
   feeds: [],
+  posts: [],
 });
 
 export const i18n = i18next.createInstance();
@@ -30,7 +31,7 @@ const schema = yup.object({
     .string()
     .required()
     .url()
-    .test('unique', 'errors.duplicate', (value) => !state.feeds.includes(value)),
+    .test('unique', 'errors.duplicate', (value) => !state.feeds.some((feed) => feed.url === value)),
 });
 
 export const validate = (url) => {

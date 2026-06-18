@@ -14,7 +14,7 @@
 
       <!-- Секция с заголовком и формой -->
       <section class="container-fluid bg-dark p-5">
-        <div class="row">
+        <div class="row container-xl">
           <div class="col-md-10 col-lg-8 mx-auto text-white">
             <h1 class="display-3 mb-0">RSS агрегатор</h1>
             <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
@@ -49,11 +49,39 @@
               </div>
             </form>
 
-            <p class="text-secondary my-2">Пример: https://dev.to/feed</p>
+            <p class="text-secondary my-2">Пример: https://lorem-rss.hexlet.app/feed</p>
             <p class="message-container m-0" id="messageContainer"></p>
           </div>
         </div>
       </section>
+
+      <!-- Секция с поставми и фидами -->
+      <section class="container-fluid p-5">
+        <div class="row">
+          <div class="col-8" data-type="posts">
+            <div class="card border-0">
+              <div class="card-body">
+                <h2 class="card-title">Посты</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="card border-0" data-type="feeds">
+              <div class="card-body">
+                <h2 class="card-title">Фиды</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <!-- Секция футера -->
+    <footer class="border-top py-3 mt-auto bg-light">
+      <div class="container-fluid text-center">
+        created by <a href="https://github.com/DramaLam/frontend-project-11">DramaLam</a>
+      </div>
+    </footer>
   </body>
 </html>
