@@ -72,7 +72,7 @@ const app = () => {
     state.feeds.forEach((feed) => {
       const li = document.createElement('li');
       li.classList.add('list-group-item', 'border-0');
-      const feedTitle = document.createElement('h6');
+      const feedTitle = document.createElement('h3');
       feedTitle.classList.add('m-0');
       feedTitle.textContent = feed.title;
       const feedDescription = document.createElement('p');
@@ -85,7 +85,7 @@ const app = () => {
     });
   });
 
-  const modal = new Modal(document.getElementById('postModal'));
+  const modal = new Modal(document.getElementById('modal'));
 
   subscribe(state.posts, () => {
     const containerPosts = document.querySelector('div[data-type="posts"]');
@@ -108,7 +108,7 @@ const app = () => {
       postLink.setAttribute('target', '_blank');
 
       if (state.readPostIds.includes(post.id)) {
-        postLink.classList.add('fw-normal');
+        postLink.classList.add('fw-normal', 'link-secondary');
       } else {
         postLink.classList.add('fw-bold');
       }
@@ -122,9 +122,9 @@ const app = () => {
       btn.addEventListener('click', () => {
         const clickedPost = state.posts.find((p) => p.id === post.id);
 
-        const elLink = document.getElementById('postModalLink');
-        const elTitle = document.getElementById('postModalTitle');
-        const elDisc = document.getElementById('postModalBody');
+        const elLink = document.getElementById('modalLink');
+        const elTitle = document.getElementById('modalTitle');
+        const elDisc = document.getElementById('modalBody');
         elDisc.innerHTML = '';
         const p = document.createElement('p');
         elDisc.append(p);
@@ -135,7 +135,7 @@ const app = () => {
 
         state.readPostIds.push(clickedPost.id);
         postLink.classList.remove('fw-bold');
-        postLink.classList.add('fw-normal');
+        postLink.classList.add('fw-normal', 'link-secondary');
 
         modal.show();
       });
