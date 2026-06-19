@@ -104,8 +104,10 @@ const app = () => {
       postLink.setAttribute('href', post.link);
       postLink.setAttribute('target', '_blank');
 
-      const btn = document.createElement('button');
+      const btn = document.createElement('a');
       btn.setAttribute('type', 'button');
+      btn.setAttribute('href', post.link);
+      btn.setAttribute('target', '_blank');
       btn.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'flex-shrink-0', 'ms-2');
       btn.textContent = 'Просмотр';
 
