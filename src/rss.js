@@ -57,4 +57,23 @@ const loadFeed = (url) => fetchRss(url)
       : 'errors.network';
   });
 
-export default loadFeed;
+const checkUpdates = () => {
+  const promises = Array.from(state.feeds).map((feed) => {
+    const { url } = feed;
+    const existingLinks = new Set(state.posts.map((post) => post.link));
+
+    return fetchRss(url)
+      .then((xmlStr) => parseRss(xmlStr))
+      .then((data) => {
+        const fetchedPosts = data.posts;
+        const newPosts = fetchedPosts.filter((post) => !existingLinks.has(post.link));
+        state.posts.push(...newPosts);
+      });
+  });
+
+  Promise.all(promises).finally(() => {
+    setTimeout(checkUpdates, 5000);
+  });
+};
+
+export { loadFeed, checkUpdates };
