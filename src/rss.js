@@ -6,7 +6,12 @@ const fetchRss = (url) => {
   const proxyUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(url)}`;
 
   return axios.get(proxyUrl)
-    .then((response) => response.data.contents);
+    .then((response) => {
+      const data = typeof response.data === 'string' 
+        ? JSON.parse(response.data) 
+        : response.data;
+      return data.contents;
+    });
 };
 
 // Парсинг XML, возвращенние { feed, posts }
@@ -46,10 +51,7 @@ const parseRss = (xmlStr) => {
 
 // Вызовы функций, обновление стейта
 const loadFeed = (url) => fetchRss(url)
-  .then((xmlStr) => {
-    console.log('xmlStr:', xmlStr); // ← что реально приходит?
-    return parseRss(xmlStr);
-  })
+  .then((xmlStr) => parseRss(xmlStr))
   .then((data) => {
     state.feeds.push({ ...data.feed, url });
     state.posts.push(...data.posts);
