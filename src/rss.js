@@ -22,26 +22,30 @@ const fetchRss = (url) => {
 // Парсинг XML, возвращенние { feed, posts }
 const parseRss = (xmlStr) => {
   const parser = new DOMParser();
-  // Строку XML превращаем в документ
   const doc = parser.parseFromString(xmlStr, 'application/xml');
 
-  // Обработка ошибки
   const errorNode = doc.querySelector('parsererror');
   if (errorNode) {
     throw new Error('errors.invalidRss');
   }
 
-  const feedTitle = doc.querySelector('channel > title').textContent; // название фида
-  const feedDescription = doc.querySelector('channel > description').textContent; // описание фида
+  const feedTitle = doc.querySelector('channel > title').textContent;
+  const feedDescription = doc.querySelector('channel > description').textContent;
   const feedID = crypto.randomUUID();
+
+  // Вспомогательная функция для получения текста тега
+  const getElementText = (item, tag) => {
+    const el = Array.from(item.children).find((child) => child.tagName === tag);
+    return el ? el.textContent : '';
+  };
 
   const items = doc.querySelectorAll('item');
   const posts = Array.from(items).map((item) => ({
     id: crypto.randomUUID(),
     feedID,
-    title: item.querySelector('title').textContent,
-    link: item.querySelector('link').textContent,
-    description: item.querySelector('description').textContent,
+    title: getElementText(item, 'title'),
+    link: getElementText(item, 'link'),
+    description: getElementText(item, 'description'),
   }));
 
   return {
