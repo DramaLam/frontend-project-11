@@ -8,7 +8,7 @@ export default {
       notEmpty: 'Не должно быть пустым',
       duplicate: 'RSS уже существует',
       invalidRss: 'Ресурс не содержит валидный RSS',
-      network: 'Ошибка сети. Проверьте подключение',
+      network: 'Ошибка сети',
     },
   },
 };
