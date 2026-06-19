@@ -46,7 +46,10 @@ const parseRss = (xmlStr) => {
 
 // Вызовы функций, обновление стейта
 const loadFeed = (url) => fetchRss(url)
-  .then((xmlStr) => parseRss(xmlStr))
+  .then((xmlStr) => {
+    console.log('xmlStr:', xmlStr); // ← что реально приходит?
+    return parseRss(xmlStr);
+  })
   .then((data) => {
     state.feeds.push({ ...data.feed, url });
     state.posts.push(...data.posts);
