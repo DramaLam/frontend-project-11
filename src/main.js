@@ -106,10 +106,12 @@ const app = () => {
       postLink.textContent = post.title;
       postLink.setAttribute('href', post.link);
       postLink.setAttribute('target', '_blank');
-      
-      state.readPostIds.includes(post.id) ?
-        postLink.classList.add('fw-normal') :
+
+      if (state.readPostIds.includes(post.id)) {
+        postLink.classList.add('fw-normal');
+      } else {
         postLink.classList.add('fw-bold');
+      }
 
       const btn = document.createElement('button');
       btn.setAttribute('type', 'button');
@@ -118,7 +120,7 @@ const app = () => {
       btn.textContent = 'Просмотр';
 
       btn.addEventListener('click', () => {
-        const clickedPost = state.posts.find((p) => p.id === post.id)
+        const clickedPost = state.posts.find((p) => p.id === post.id);
 
         const elLink = document.getElementById('postModalLink');
         const elTitle = document.getElementById('postModalTitle');
@@ -126,7 +128,6 @@ const app = () => {
         elDisc.innerHTML = '';
         const p = document.createElement('p');
         elDisc.append(p);
-
 
         elTitle.textContent = clickedPost.title;
         p.textContent = clickedPost.description;
