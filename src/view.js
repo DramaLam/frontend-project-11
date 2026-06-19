@@ -11,6 +11,7 @@ export const state = proxy({
   },
   feeds: [],
   posts: [],
+  readPostIds: [],
 });
 
 export const i18n = i18next.createInstance();

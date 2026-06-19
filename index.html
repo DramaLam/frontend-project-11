@@ -55,7 +55,7 @@
         </div>
       </section>
 
-      <!-- Секция с поставми и фидами -->
+      <!-- Секция с постами и фидами -->
       <section class="container-fluid p-5">
         <div class="row">
           <div class="col-8" data-type="posts">
@@ -74,6 +74,24 @@
             </div>
           </div>
         </div>
+
+        <!-- Модальное окно -->
+        <div class="modal fade" id="postModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="postModalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="postModalBody"></div>
+              <div class="modal-footer">
+                <a href="#" id="postModalLink" class="btn btn-primary" target="_blank">Читать полностью</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
     </main>
 
