@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'bootstrap';
 import { subscribe } from 'valtio/vanilla';
 import {
   state, validate, i18n, initPromise,
@@ -84,6 +85,8 @@ const app = () => {
     });
   });
 
+  const modal = new Modal(document.getElementById('postModal'));
+
   subscribe(state.posts, () => {
     const containerPosts = document.querySelector('div[data-type="posts"]');
     let ul = containerPosts.querySelector('ul');
@@ -103,13 +106,38 @@ const app = () => {
       postLink.textContent = post.title;
       postLink.setAttribute('href', post.link);
       postLink.setAttribute('target', '_blank');
+      
+      state.readPostIds.includes(post.id) ?
+        postLink.classList.add('fw-normal') :
+        postLink.classList.add('fw-bold');
 
-      const btn = document.createElement('a');
+      const btn = document.createElement('button');
       btn.setAttribute('type', 'button');
-      btn.setAttribute('href', post.link);
-      btn.setAttribute('target', '_blank');
       btn.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'flex-shrink-0', 'ms-2');
+      btn.dataset.postId = post.id;
       btn.textContent = 'Просмотр';
+
+      btn.addEventListener('click', () => {
+        const clickedPost = state.posts.find((p) => p.id === post.id)
+
+        const elLink = document.getElementById('postModalLink');
+        const elTitle = document.getElementById('postModalTitle');
+        const elDisc = document.getElementById('postModalBody');
+        elDisc.innerHTML = '';
+        const p = document.createElement('p');
+        elDisc.append(p);
+
+
+        elTitle.textContent = clickedPost.title;
+        p.textContent = clickedPost.description;
+        elLink.setAttribute('href', clickedPost.link);
+
+        state.readPostIds.push(clickedPost.id);
+        postLink.classList.remove('fw-bold');
+        postLink.classList.add('fw-normal');
+
+        modal.show();
+      });
 
       li.append(postLink, btn);
       ul.append(li);
