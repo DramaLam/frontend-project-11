@@ -7,9 +7,14 @@ const fetchRss = (url) => {
 
   return axios.get(proxyUrl)
     .then((response) => {
-      const data = typeof response.data === 'string' 
-        ? JSON.parse(response.data) 
+      const data = typeof response.data === 'string'
+        ? JSON.parse(response.data)
         : response.data;
+      
+      if (!data.contents) {
+        throw new Error('errors.network');
+      }
+      
       return data.contents;
     });
 };
@@ -58,6 +63,7 @@ const loadFeed = (url) => fetchRss(url)
   })
 // Отлавливаем сетевые ошибки
   .catch((err) => {
+    console.error('CATCH ERROR:', err.message, err); // покажет реальную причину
     state.form.error = err.message === 'errors.invalidRss'
       ? 'errors.invalidRss'
       : 'errors.network';
