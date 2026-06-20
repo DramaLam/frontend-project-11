@@ -24,8 +24,8 @@ const parseRss = (xmlStr) => {
     throw new Error('errors.invalidRss');
   }
 
-  const feedTitle = doc.querySelector('channel > title').textContent;
-  const feedDescription = doc.querySelector('channel > description').textContent;
+  const feedTitle = doc.querySelector('channel > title')?.textContent ?? '';
+  const feedDescription = doc.querySelector('channel > description')?.textContent ?? '';
   const feedID = crypto.randomUUID();
 
   // Вспомогательная функция для получения текста тега
@@ -38,9 +38,9 @@ const parseRss = (xmlStr) => {
   const posts = Array.from(items).map((item) => ({
     id: crypto.randomUUID(),
     feedID,
-    title: getElementText(item, 'title'),
-    link: getElementText(item, 'link'),
-    description: getElementText(item, 'description'),
+    title: item.querySelector('title').textContent,
+    link: item.querySelector('link') ? item.querySelector('link').textContent.trim() : '',
+    description: item.querySelector('description').textContent,
   }));
 
   return {
