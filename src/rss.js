@@ -4,12 +4,9 @@ import { state } from './view.js';
 // Cкачивание XML через AllOrigins
 const fetchRss = (url) => {
   const proxyUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(url)}`;
-
-  return axios.get(proxyUrl, {
-    responseType: 'text', // ← всегда получаем текст
-  })
+  return axios.get(proxyUrl, { responseType: 'text' })
     .then((response) => {
-      const data = JSON.parse(response.data); // ← парсим сами
+      const data = JSON.parse(response.data);
       return data.contents;
     });
 };
@@ -17,7 +14,7 @@ const fetchRss = (url) => {
 // Парсинг XML, возвращенние { feed, posts }
 const parseRss = (xmlStr) => {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(xmlStr, 'application/xml');
+  const doc = parser.parseFromString(xmlStr, 'text/xml');
 
   const errorNode = doc.querySelector('parsererror');
   if (errorNode) {
