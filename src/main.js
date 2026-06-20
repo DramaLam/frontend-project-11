@@ -28,6 +28,7 @@ const app = () => {
       return loadFeed(url).then(() => {
         if (state.form.error) return null;
 
+        state.form.error = null;
         state.form.url = '';
         input.value = '';
         input.focus();
