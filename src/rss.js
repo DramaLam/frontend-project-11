@@ -5,16 +5,11 @@ import { state } from './view.js';
 const fetchRss = (url) => {
   const proxyUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(url)}`;
 
-  return axios.get(proxyUrl)
+  return axios.get(proxyUrl, {
+    responseType: 'text', // ← всегда получаем текст
+  })
     .then((response) => {
-      const data = typeof response.data === 'string'
-        ? JSON.parse(response.data)
-        : response.data;
-      
-      if (!data.contents) {
-        throw new Error('errors.network');
-      }
-      
+      const data = JSON.parse(response.data); // ← парсим сами
       return data.contents;
     });
 };
