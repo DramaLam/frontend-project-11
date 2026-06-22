@@ -1,5 +1,5 @@
 install:
-	npm ci
+	npm ci --include=dev
 
 lint:
 	npm run lint
