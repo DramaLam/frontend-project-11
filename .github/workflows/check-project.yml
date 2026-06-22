@@ -29,19 +29,17 @@ jobs:
       - name: Debug ESLint
         run: npm list eslint --depth=0
       
-      - name: Run linter (with debug)
+      - name: Ensure ESLint is available
         run: |
-          npm run lint || {
-            echo "========================================="
-            echo "ESLint failed with exit code: $?"
-            echo "========================================="
-            echo "Checking if eslint is installed..."
-            npx eslint --version || echo "ESLint not found!"
-            echo "========================================="
-            echo "Contents of node_modules/.bin:"
-            ls -la node_modules/.bin/ || echo "node_modules/.bin not found!"
-            exit 1
-          }
+          if ! command -v eslint &> /dev/null; then
+            echo "ESLint not found, installing explicitly..."
+            npm install -g eslint
+          else
+            echo "ESLint is already installed."
+          fi
+      
+      - name: Run linter
+        run: npm run lint
       
       - name: Run tests
         run: make test
