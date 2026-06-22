@@ -1,12 +1,13 @@
 import axios from 'axios';
-import { state } from './view.js';
 import uniqueId from 'lodash/uniqueId.js';
+import { state } from './view.js';
 
 // Cкачивание XML через AllOrigins
 const fetchRss = (url) => {
   const proxyUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(url)}`;
-  return axios.get(proxyUrl, { responseType: 'text' })
-    .then((response) => response.data);
+
+  return axios.get(proxyUrl)
+    .then((response) => response.data.contents);
 };
 
 // Парсинг XML, возвращенние { feed, posts }
@@ -51,7 +52,7 @@ const loadFeed = (url) => fetchRss(url)
   })
 // Отлавливаем сетевые ошибки
   .catch((err) => {
-    console.error('CATCH ERROR:', err.message, err); // покажет реальную причину
+    console.error('CATCH ERROR:', err.message, err);
     state.form.error = err.message === 'errors.invalidRss'
       ? 'errors.invalidRss'
       : 'errors.network';
