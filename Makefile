@@ -16,3 +16,6 @@ publish:
 run:
 	npm install
 	npm run dev
+
+test:
+	npm run test

@@ -28,6 +28,7 @@ const app = () => {
       return loadFeed(url).then(() => {
         if (state.form.error) return null;
 
+        state.form.error = null;
         state.form.url = '';
         input.value = '';
         input.focus();
@@ -72,7 +73,7 @@ const app = () => {
     state.feeds.forEach((feed) => {
       const li = document.createElement('li');
       li.classList.add('list-group-item', 'border-0');
-      const feedTitle = document.createElement('h6');
+      const feedTitle = document.createElement('h3');
       feedTitle.classList.add('m-0');
       feedTitle.textContent = feed.title;
       const feedDescription = document.createElement('p');
@@ -85,7 +86,7 @@ const app = () => {
     });
   });
 
-  const modal = new Modal(document.getElementById('postModal'));
+  const modal = new Modal(document.getElementById('modal'));
 
   subscribe(state.posts, () => {
     const containerPosts = document.querySelector('div[data-type="posts"]');
@@ -106,10 +107,12 @@ const app = () => {
       postLink.textContent = post.title;
       postLink.setAttribute('href', post.link);
       postLink.setAttribute('target', '_blank');
-      
-      state.readPostIds.includes(post.id) ?
-        postLink.classList.add('fw-normal') :
+
+      if (state.readPostIds.includes(post.id)) {
+        postLink.classList.add('fw-normal', 'link-secondary');
+      } else {
         postLink.classList.add('fw-bold');
+      }
 
       const btn = document.createElement('button');
       btn.setAttribute('type', 'button');
@@ -118,15 +121,14 @@ const app = () => {
       btn.textContent = 'Просмотр';
 
       btn.addEventListener('click', () => {
-        const clickedPost = state.posts.find((p) => p.id === post.id)
+        const clickedPost = state.posts.find((p) => p.id === post.id);
 
-        const elLink = document.getElementById('postModalLink');
-        const elTitle = document.getElementById('postModalTitle');
-        const elDisc = document.getElementById('postModalBody');
+        const elLink = document.getElementById('modalLink');
+        const elTitle = document.getElementById('modalTitle');
+        const elDisc = document.getElementById('modalBody');
         elDisc.innerHTML = '';
         const p = document.createElement('p');
         elDisc.append(p);
-
 
         elTitle.textContent = clickedPost.title;
         p.textContent = clickedPost.description;
@@ -134,7 +136,7 @@ const app = () => {
 
         state.readPostIds.push(clickedPost.id);
         postLink.classList.remove('fw-bold');
-        postLink.classList.add('fw-normal');
+        postLink.classList.add('fw-normal', 'link-secondary');
 
         modal.show();
       });

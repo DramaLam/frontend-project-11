@@ -4,25 +4,25 @@ import { state } from './view.js';
 // Cкачивание XML через AllOrigins
 const fetchRss = (url) => {
   const proxyUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(url)}`;
-
-  return axios.get(proxyUrl)
-    .then((response) => response.data.contents);
+  return axios.get(proxyUrl, { responseType: 'text' })
+    .then((response) => {
+      const data = JSON.parse(response.data);
+      return data.contents;
+    });
 };
 
 // Парсинг XML, возвращенние { feed, posts }
 const parseRss = (xmlStr) => {
   const parser = new DOMParser();
-  // Строку XML превращаем в документ
-  const doc = parser.parseFromString(xmlStr, 'application/xml');
+  const doc = parser.parseFromString(xmlStr, 'text/xml');
 
-  // Обработка ошибки
   const errorNode = doc.querySelector('parsererror');
   if (errorNode) {
     throw new Error('errors.invalidRss');
   }
 
-  const feedTitle = doc.querySelector('channel > title').textContent; // название фида
-  const feedDescription = doc.querySelector('channel > description').textContent; // описание фида
+  const feedTitle = doc.querySelector('channel > title')?.textContent ?? '';
+  const feedDescription = doc.querySelector('channel > description')?.textContent ?? '';
   const feedID = crypto.randomUUID();
 
   const items = doc.querySelectorAll('item');
@@ -30,7 +30,7 @@ const parseRss = (xmlStr) => {
     id: crypto.randomUUID(),
     feedID,
     title: item.querySelector('title').textContent,
-    link: item.querySelector('link').textContent,
+    link: item.querySelector('link') ? item.querySelector('link').textContent.trim() : '',
     description: item.querySelector('description').textContent,
   }));
 
@@ -53,6 +53,7 @@ const loadFeed = (url) => fetchRss(url)
   })
 // Отлавливаем сетевые ошибки
   .catch((err) => {
+    console.error('CATCH ERROR:', err.message, err); // покажет реальную причину
     state.form.error = err.message === 'errors.invalidRss'
       ? 'errors.invalidRss'
       : 'errors.network';

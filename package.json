@@ -1,13 +1,14 @@
 {
-  "name": "frontend-project-11",
+  "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/DramaLam/frontend-project-11/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/DramaLam/frontend-project-11/actions)",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Тесты Hexlet запускаются автоматически\" && exit 0",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,12 @@
   },
   "homepage": "https://github.com/DramaLam/frontend-project-11#readme",
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^8.57.1",
+    "@playwright/test": "^1.61.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
     "globals": "^17.6.0",
     "jest": "^30.4.2",
     "prettier": "^3.8.3",
