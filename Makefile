@@ -2,7 +2,7 @@ install:
 	npm ci
 
 lint:
-	npx eslint .
+	npm run lint
 
 fix:
 	npx eslint . --fix
