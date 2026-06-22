@@ -25,12 +25,6 @@ const parseRss = (xmlStr) => {
   const feedDescription = doc.querySelector('channel > description')?.textContent ?? '';
   const feedID = crypto.randomUUID();
 
-  // Вспомогательная функция для получения текста тега
-  const getElementText = (item, tag) => {
-    const el = Array.from(item.children).find((child) => child.tagName === tag);
-    return el ? el.textContent : '';
-  };
-
   const items = doc.querySelectorAll('item');
   const posts = Array.from(items).map((item) => ({
     id: crypto.randomUUID(),
