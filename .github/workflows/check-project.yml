@@ -26,20 +26,15 @@ jobs:
       - name: Install dependencies
         run: npm ci --include=dev
       
-      - name: Debug ESLint
-        run: npm list eslint --depth=0
-      
       - name: Ensure ESLint is available
         run: |
           if ! command -v eslint &> /dev/null; then
-            echo "ESLint not found, installing explicitly..."
+            echo "ESLint not found, installing globally..."
             npm install -g eslint
-          else
-            echo "ESLint is already installed."
           fi
       
       - name: Run linter
-        run: npm run lint
+        run: make lint
       
       - name: Run tests
         run: make test
