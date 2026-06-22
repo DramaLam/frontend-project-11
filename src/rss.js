@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { state } from './view.js';
+import uniqueId from 'lodash/uniqueId.js';
 
 // Cкачивание XML через AllOrigins
 const fetchRss = (url) => {
@@ -20,11 +21,11 @@ const parseRss = (xmlStr) => {
 
   const feedTitle = doc.querySelector('channel > title')?.textContent ?? '';
   const feedDescription = doc.querySelector('channel > description')?.textContent ?? '';
-  const feedID = crypto.randomUUID();
+  const feedID = uniqueId('feed_');
 
   const items = doc.querySelectorAll('item');
   const posts = Array.from(items).map((item) => ({
-    id: crypto.randomUUID(),
+    id: uniqueId('feed_'),
     feedID,
     title: item.querySelector('title').textContent,
     link: item.querySelector('link') ? item.querySelector('link').textContent.trim() : '',
