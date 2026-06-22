@@ -23,19 +23,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       
-      - name: Install dependencies
+      - name: Install dependencies (including dev)
         run: npm install --include=dev
-      
-      - name: Debug ESLint
-        run: |
-          if [ -f "node_modules/.bin/eslint" ]; then
-            echo "ESLint found!"
-            ./node_modules/.bin/eslint --version
-          else
-            echo "ESLint not found!"
-            echo "Contents of node_modules/.bin:"
-            ls -la node_modules/.bin/ || echo "node_modules/.bin does not exist"
-          fi
       
       - name: Run linter
         run: make lint
