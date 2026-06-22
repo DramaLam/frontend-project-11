@@ -2,10 +2,10 @@ install:
 	npm ci --include=dev
 
 lint:
-	eslint .
+	npx eslint .
 
 fix:
-	eslint . --fix
+	npx eslint . --fix
 
 webpack:
 	npx webpack serve
