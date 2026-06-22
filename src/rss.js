@@ -5,10 +5,7 @@ import { state } from './view.js';
 const fetchRss = (url) => {
   const proxyUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(url)}`;
   return axios.get(proxyUrl, { responseType: 'text' })
-    .then((response) => {
-      const data = JSON.parse(response.data);
-      return data.contents;
-    });
+    .then((response) => response.data);
 };
 
 // Парсинг XML, возвращенние { feed, posts }
