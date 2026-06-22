@@ -17,15 +17,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+      
       - name: Install dependencies
         run: npm ci --include=dev
-      - name: Debug: list installed packages
+      
+      - name: Debug ESLint
         run: npm list eslint --depth=0
+      
       - name: Run linter
         run: npm run lint
+      
       - name: Run tests
         run: make test
