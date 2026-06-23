@@ -2,6 +2,7 @@ install:
 	npm ci
 	
 lint:
+	npm ci
 	npm run lint
 
 fix:
