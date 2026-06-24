@@ -1,0 +1,7 @@
+export default {
+  testDir: './__tests__',
+  timeout: 30000,
+  use: {
+    baseURL: 'http://localhost:5173',
+  },
+};
